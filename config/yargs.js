@@ -10,10 +10,12 @@ const argv = require('yargs')
         completado: {
             alias: 'c',
             default: true,
-            desc: 'Especificar si la tarea se completo(true o false)'
+            desc: 'Especificar si la tarea se completo(true o false)',
+            type: 'boolean'
         }
     })
     .command('listar', 'Listar todas las tareas por hacer')
+    .command('eliminar', 'Eliminar una tarea por hacer', { descripcion: opc })
     .help()
     .argv
 

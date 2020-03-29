@@ -10,6 +10,12 @@
      }
  }
 
+ const fnguardar = () => {
+     fs.writeFile('db/tareas.json', JSON.stringify(data), (err) => {
+         if (err) throw err('Error al crear el archivo con', descripcion)
+     })
+ }
+
  const fncrear = (descripcion) => {
      fncargar()
      data.push({
@@ -17,9 +23,7 @@
          completado: false
      })
 
-     fs.writeFile('db/tareas.json', JSON.stringify(data), (err) => {
-         if (err) throw err('Error al crear el archivo con', descripcion)
-     })
+     fnguardar()
  }
 
  const fnlistar = () => {
@@ -29,7 +33,26 @@
      }
  }
 
+ const fnactualizar = (descripcion, completado = true) => {
+     fncargar()
+     let i = data.findIndex(valor => valor.descripcion === descripcion)
+     if (i >= 0)
+         data[i].completado = completado
+
+     fnguardar()
+ }
+
+ const fneliminar = descripcion => {
+     fncargar()
+     let ndata = data.filter(valor => valor.descripcion !== descripcion)
+     if (data > ndata)
+         data = ndata
+     fnguardar()
+ }
+
  module.exports = {
      fncrear,
-     fnlistar
+     fnlistar,
+     fnactualizar,
+     fneliminar
  }

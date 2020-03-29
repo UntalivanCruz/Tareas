@@ -8,11 +8,18 @@ for (comando of argv._) {
             tareas.fncrear(argv.descripcion)
             break
         case 'actualizar':
-            console.log('actualiza')
+            tareas.fnactualizar(argv.descripcion, argv.completado)
             break
         case 'listar':
             console.log("=== TAREAS POR HACER ===".green);
             tareas.fnlistar()
             console.log("========================".green);
+            break
+        case 'eliminar':
+            tareas.fneliminar(argv.descripcion)
+            break
+        default:
+            console.log('Opcion no valida');
+            break
     }
 }
